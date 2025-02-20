@@ -28,4 +28,19 @@ class TestBase extends TestCase
         $this->assertEquals('bar', $args['foo']);
         $this->assertEquals('baz', $args['foobar']);
     }
+
+    public function testParseArgs()
+    {
+        $base = new Base();
+        $args = $base->parse_args([], [
+            'foo'    => 'bar',
+            'foobar' => 'baz',
+        ]);
+
+        $this->assertIsArray($args);
+        $this->assertArrayHasKey('foo', $args);
+        $this->assertArrayHasKey('foobar', $args);
+        $this->assertEquals('bar', $args['foo']);
+        $this->assertEquals('baz', $args['foobar']);
+    }
 }

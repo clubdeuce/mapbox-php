@@ -37,4 +37,14 @@ class Base
 
     }
 
+    public function parse_args(array $args, array $defaults = []): array
+    {
+        foreach ($defaults as $key => $val) {
+            if (!isset($args[$key]))
+                $args[$key] = $val;
+        }
+
+        return $args;
+    }
+
 }
