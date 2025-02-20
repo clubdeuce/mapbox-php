@@ -1,0 +1,24 @@
+{
+    "name": "clubdeuce/mapbox-php",
+    "description": "A PHP wrapper for the Mapbox API",
+    "type": "library",
+    "require": {
+        "guzzlehttp/guzzle": "^7.9"
+    },
+    "require-dev": {
+        "consolidation/robo": "^5.1",
+        "phpunit/phpunit": "^12.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Clubdeuce\\MapboxPhp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Daryl",
+            "email": "daryl@clubdeuce.net"
+        }
+    ]
+}
