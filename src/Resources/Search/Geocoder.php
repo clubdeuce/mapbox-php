@@ -45,7 +45,7 @@ class Geocoder extends Api
         return null;
     }
 
-    function latitude() : float
+    public function latitude() : ?float
     {
         if ($this->response->features[0]) {
             return $this->response->features[0]->geometry->coordinates[1];
@@ -54,7 +54,7 @@ class Geocoder extends Api
         trigger_error('Response data is empty', E_USER_ERROR);
     }
 
-    function longitude() : float
+    public function longitude() : ?float
     {
         if ($this->response->features[0]) {
             return $this->response->features[0]->geometry->coordinates[0];
