@@ -56,8 +56,7 @@ class Api extends Base
         return [
             'headers' => [
                 'Accept' => 'application/json',
-            ],
-            'body'    => [],
+            ]
         ];
     }
 }

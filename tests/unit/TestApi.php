@@ -29,7 +29,6 @@ class TestApi extends TestCase
         $this->assertArrayHasKey('headers', $result);
         $this->assertIsArray($result['headers']);
         $this->assertArrayHasKey('Accept', $result['headers']);
-        $this->assertArrayHasKey('body', $result);
     }
 
     public function testGet()
