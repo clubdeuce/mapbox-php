@@ -3,7 +3,6 @@
 namespace Clubdeuce\MapboxPhp\Resources\Search;
 
 use Clubdeuce\MapboxPHP\Helpers\Api;
-use Psr\Http\Message\ResponseInterface;
 
 /**
  * @method object response()
