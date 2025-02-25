@@ -21,9 +21,13 @@ class Geocoder extends Api
         $args = $this->parse_args($args, array(
             'permanent'    => $this->permanent_storage,
             'autocomplete' => false,
+            'bbox'         => null,
             'country'      => null,
             'format'       => 'geojson',
+            'language'     => null,
             'limit'        => 5,
+            'proximity'    => null,
+            'types'        => null,
             'worldview'    => 'us'
         ));
 
@@ -32,9 +36,9 @@ class Geocoder extends Api
             'access_token' => $this->key()
         ]);
 
-        $args = http_build_query($args);
+        $query_string = http_build_query(array_filter($args));
 
-        $response = $this->get("{$this->endpoint}/forward?{$args}");
+        $response = $this->get("{$this->endpoint}/forward?{$query_string}");
 
         if ($response) {
             $this->response = json_decode($response->getBody()->getContents());
