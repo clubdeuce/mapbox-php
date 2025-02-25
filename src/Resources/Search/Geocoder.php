@@ -60,7 +60,7 @@ class Geocoder extends Api
             'country'        => null,
         ]);
 
-        if(!empty($address['address_line1'])) {
+        if (!empty($address['address_line1'])) {
             unset($address['address_number']);
             unset($address['street']);
         }
