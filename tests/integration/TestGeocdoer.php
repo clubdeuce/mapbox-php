@@ -42,6 +42,66 @@ class TestGeocdoer extends TestCase
         $this->assertCount(2, $result->features);
     }
 
+    /**
+     * @covers ::forwardStructuredInput
+     */
+    public function testForwardStructuredInput()
+    {
+        $geocoder = new Geocoder([
+            'key'   => MAPBOX_TEST_KEY,
+        ]);
+
+        $address = [
+            'address_number' => '1600',
+            'street'         => 'Pennsylvania Ave NW',
+            'place'          => 'Washington DC',
+            'postcode'       => '20502',
+            'country'        => 'us'
+        ];
+
+        $result = $geocoder->forwardStructuredInput($address);
+
+        $this->assertIsObject($result);
+        $this->assertObjectHasProperty('features', $result);
+        $this->assertIsArray($result->features);
+        $this->assertCount(1, $result->features);
+
+        foreach($result->features as $feature) {
+            $this->assertObjectHasProperty('geometry', $feature);
+            $this->assertIsArray($feature->geometry->coordinates);
+        }
+    }
+
+    /**
+     * @covers ::forwardStructuredInput
+     */
+    public function testForwardStructuredInputCombined()
+    {
+        $geocoder = new Geocoder([
+            'key'   => MAPBOX_TEST_KEY,
+        ]);
+
+        $address = [
+            'address_line1' => '1600 Pennsylvania Ave NW',
+            'place'         => 'Washington DC',
+            'postcode'      => '20502',
+            'country'       => 'us'
+        ];
+
+        $result = $geocoder->forwardStructuredInput($address);
+
+        $this->assertIsObject($result);
+        $this->assertObjectHasProperty('features', $result);
+        $this->assertIsArray($result->features);
+        $this->assertCount(1, $result->features);
+
+        foreach($result->features as $feature) {
+            $this->assertObjectHasProperty('geometry', $feature);
+            $this->assertIsArray($feature->geometry->coordinates);
+            $this->assertGreaterThan(0, $geocoder->latitude());
+            $this->assertLessThan(0, $geocoder->longitude());
+        }
+    }
 
     /**
      * @covers ::latitude
