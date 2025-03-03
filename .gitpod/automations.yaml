@@ -1,7 +1,7 @@
 tasks:
     composer-install:
         name: composer installation
-        command: ./.gitpod/scripts/composer-install.sh && composer install
+        command: ./.gitpod/scripts/composer-install.sh && php composer.phar install
         triggeredBy:
             - postDevcontainerStart
 services:
