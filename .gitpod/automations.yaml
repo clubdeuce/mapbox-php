@@ -1,4 +1,9 @@
 tasks:
+    composer-install:
+        name: composer installation
+        command: ./.gitpod/scripts/composer-install.sh && composer install
+        triggeredBy:
+            - postDevcontainerStart
 services:
     redis:
         name: redis
