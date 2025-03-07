@@ -100,6 +100,29 @@ class Geocoder extends Api
         trigger_error('Response data is empty', E_USER_ERROR);
     }
 
+    public function reverse(float $lat, float $long, array $args = array())
+    {
+        $args = $this->parse_args($args, [
+            'permanent' => $this->permanent_storage,
+            'worldview' => 'us'
+        ]);
+
+        $args['access_token'] = $this->key();
+        $args['latitude']     = $lat;
+        $args['longitude']    = $long;
+
+        $query_string = \http_build_query(array_filter($args));
+
+        $response = $this->get("{$this->endpoint}/reverse?{$query_string}");
+
+        if ($response) {
+            $this->response = json_decode($response->getBody()->getContents());
+            return $this->response->features;
+        }
+
+        return [];
+    }
+
     public function default_args() : array
     {
         return [

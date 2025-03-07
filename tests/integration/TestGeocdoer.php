@@ -5,6 +5,8 @@ namespace Clubdeuce\MapboxPHP\Tests\Integration;
 use Clubdeuce\MapboxPhp\Resources\Search\Geocoder;
 use Clubdeuce\MapboxPHP\Tests\TestCase;
 
+use function PHPUnit\Framework\assertEquals;
+
 /**
  * @coversDefaultClass \Clubdeuce\MapboxPhp\Resources\Search\Geocoder
  */
@@ -101,6 +103,27 @@ class TestGeocdoer extends TestCase
             $this->assertGreaterThan(0, $geocoder->latitude());
             $this->assertLessThan(0, $geocoder->longitude());
         }
+    }
+
+    public function testReverse()
+    {
+        $geocoder = new Geocoder([
+            'key' => MAPBOX_TEST_KEY,
+        ]);
+
+        $result = $geocoder->reverse(40.733, -73.989);
+
+        $this->assertIsArray($result);
+        $this->assertCount(8, $result);
+        $this->assertObjectHasProperty('properties', $result[0]);
+        $this->assertEquals('address', $result[0]->properties->feature_type);
+        $this->assertObjectHasProperty('properties', $result[0]);
+        $this->assertObjectHasProperty('context', $result[0]->properties);
+        $this->assertEquals('120', $result[0]->properties->context->address->address_number);
+        $this->assertEquals('East 13th Street', $result[0]->properties->context->address->street_name);
+        $this->assertEquals('New York', $result[0]->properties->context->place->name);
+        $this->assertEquals('New York', $result[0]->properties->context->region->name);
+        $this->assertEquals('10003', $result[0]->properties->context->postcode->name);
     }
 
     /**
