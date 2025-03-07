@@ -105,6 +105,9 @@ class TestGeocdoer extends TestCase
         }
     }
 
+    /**
+     * @covers ::reverse
+     */
     public function testReverse()
     {
         $geocoder = new Geocoder([
